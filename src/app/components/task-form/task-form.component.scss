@@ -1,0 +1,10 @@
+:host {
+  .task-form {
+    &_input {
+      width: 100%; // matches the mockup design
+      border: 0; // removes the default styling
+      border-bottom: 1px solid gray; // matches the mockup design
+      outline: 0; // removes the default styling
+    }
+  }
+}

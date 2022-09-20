@@ -1,0 +1,15 @@
+:host {
+  // ensure that things stay encapsulated with the host
+
+  .task-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-radius: 0;
+
+    span {
+      flex: 1;
+    }
+  }
+}

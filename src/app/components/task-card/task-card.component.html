@@ -1,0 +1,7 @@
+<mat-card class="task-card">
+  <mat-checkbox [(ngModel)]="isComplete"></mat-checkbox>
+  <span>{{taskData.taskDetails}}</span>
+  <button mat-icon-button (click)="removeItem()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-card>

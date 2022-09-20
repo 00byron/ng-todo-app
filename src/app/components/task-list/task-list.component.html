@@ -1,0 +1,8 @@
+<div class="task-list">
+  <!-- iterate through the dataset of task items -->
+  <ng-container *ngFor="let task of tasks$ | async">
+    <!-- use the component to display the tasks in a list through the iteration - clean code -->
+    <app-task-card [taskData]="task"></app-task-card>
+  </ng-container>
+  <mat-card class="task-list_remaining">{{itemsLeft}}</mat-card>
+</div>
