@@ -86,13 +86,14 @@ export class TaskService {
   }
 
   public removeTask(task: ITask): Observable<ITask[]> {
-    const selectedItemIndex = this._allTasks.findIndex(x => x.id !== task.id);
+    const selectedItemIndex = this._allTasks.indexOf(task);
 
     // remove the selected task
-    const newArr = this._allTasks.slice(selectedItemIndex, 1);
-    this._tasksSubject.next(newArr);
+    if (selectedItemIndex > -1) this._allTasks.splice(selectedItemIndex, 1);
+
+    this._tasksSubject.next(this._allTasks);
 
     // return the dataset as the type of observable to subscribe to async later
-    return of(newArr);
+    return of(this._allTasks);
   }
 }
