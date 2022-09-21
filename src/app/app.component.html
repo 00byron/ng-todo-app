@@ -9,12 +9,12 @@
     <div class="centered todo-main">
       <!-- page input field -->
       <div class="todo-main_form">
-        <app-task-form></app-task-form>
+        <app-task-form (updatedDataSet)="captureUpdatedList($event)"></app-task-form>
       </div>
 
       <!-- page tasks list -->
       <div class="todo-main_list">
-        <app-task-list></app-task-list>
+        <app-task-list [updatedTasks]="updatedList$"></app-task-list>
       </div>
 
     </div>

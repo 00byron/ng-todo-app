@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ITask } from './interfaces/task.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'todo-app';
+  public title = 'todo-app';
+  private _updatedList: BehaviorSubject<ITask[]> = new BehaviorSubject<ITask[]>([]);
+  public updatedList$ = this._updatedList.asObservable();
+
+  public captureUpdatedList(event: any): void {
+    this._updatedList.next(event);
+  }
 }

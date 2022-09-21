@@ -1,2 +1,2 @@
 <!-- initially I wanted to use a formGroup here, but ngModel works nicels for this use case -->
-<input matInput class="task-form_input" placeholder="What needs to be done?" [(ngModel)]="task" (keyup.enter)="captureInputValue($event)" required>
+<input matInput class="task-form_input" placeholder="What needs to be done?" [(ngModel)]="task" (keyup.enter)="captureInputValue($event)" #taskInputField>
