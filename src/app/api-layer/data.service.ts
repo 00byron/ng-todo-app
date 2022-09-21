@@ -49,6 +49,7 @@ export class TaskService {
   public addTask(task: ITask): Observable<ITask[]> {
     // add a new task to the dataset
     this._allTasks.push(task);
+    this._tasksSubject.next(this._allTasks);
 
     // return the dataset as the type of observable to subscribe to async later
     return of(this._allTasks);
@@ -72,7 +73,9 @@ export class TaskService {
     const listOfItems = data ? data : this._tasksSubject.getValue();
 
     let tempString;
-    const unCompleteTasks = listOfItems.filter(d => !d.isComplete);
+    const unCompleteTasks = listOfItems.filter(d => {
+      return d.isComplete === false
+    });
 
     if (unCompleteTasks.length !== 1) tempString = `${unCompleteTasks.length} items left`;
     else tempString = `${unCompleteTasks.length} item left`;

@@ -41,7 +41,7 @@ export class TaskCardComponent implements OnInit, OnDestroy {
   }
 
   public markAsComplete(event?: any): void {
-    if (event) {
+    if (event.checked) {
       this.taskData.isComplete = true;
       const markCompleteSub = this._taskService.markAsComplete(this.taskData).subscribe(resp => {
         this._taskService.updateItemsLeft(resp);
@@ -55,7 +55,7 @@ export class TaskCardComponent implements OnInit, OnDestroy {
 
   private configureData(): void {
     this.isComplete = this.taskData.isComplete;
-    this._taskService.markAsComplete(this.taskData);
+    if (this.isComplete) this._taskService.markAsComplete(this.taskData);
   }
 
 }
