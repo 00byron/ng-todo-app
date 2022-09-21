@@ -51,6 +51,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     const addTaskSub = this._taskService.addTask(data).subscribe(resp => {
       this.task = '';
       this._snackBar.open('Task added Successfully!', 'Ok');
+      this._taskService.updateItemsLeft(resp);
       // I was tempted to add an observable to the service class to monitor the list
       // however, with the time constraint, I went this route of emitting the data rather
       this.updatedDataSet.emit(resp);

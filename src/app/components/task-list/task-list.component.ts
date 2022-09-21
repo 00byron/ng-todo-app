@@ -44,6 +44,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   public updateList(event: any): void {
     this._tasksSubject.next(event);
+    console.log('task removed event ===> ', event);
+    console.log('tasks ===> ', this._tasksSubject.getValue());
     this.calculateItemsLeft(event);
   }
 
@@ -80,14 +82,23 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this._subscriptions.push(updatedTasksSub);
   }
 
-  private calculateItemsLeft(data: ITask[]): void {
-    let tempString;
-    const unCompleteTasks = data.filter(d => !d.isComplete);
-
-    if (unCompleteTasks.length > 1) tempString = `${unCompleteTasks.length} items left`;
-    else tempString = `${unCompleteTasks.length} item left`;
-
-    this._itemsLeft.next(tempString);
+  private calculateItemsLeft(data?: ITask[]): void {
+    if (data) {
+      const updateItemsSub = this._taskService.updateItemsLeft(data).subscribe(resp => {
+        if (resp.length === 0) return;
+        this._itemsLeft.next(resp);
+      }, error => {
+        this._snackBar.open('Oops! Something Went wrong. Please try again.', 'Dismiss');
+      });
+      this._subscriptions.push(updateItemsSub);
+    }
+    const itemsLeftObservableSub =  this._taskService.tasksLeft$.subscribe(resp => {
+      if (resp.length === 0) return;
+      this._itemsLeft.next(resp);
+    }, error => {
+      this._snackBar.open('Oops! Something Went wrong. Please try again.', 'Dismiss');
+    });
+    this._subscriptions.push(itemsLeftObservableSub);
   }
 
 }
