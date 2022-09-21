@@ -44,8 +44,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   public updateList(event: any): void {
     this._tasksSubject.next(event);
-    console.log('task removed event ===> ', event);
-    console.log('tasks ===> ', this._tasksSubject.getValue());
     this.calculateItemsLeft(event);
   }
 
@@ -73,7 +71,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this._subscriptions.push(getAllTasksSub);
   }
 
-  private updateTasks(): void{
+  private updateTasks(): void {
     const updatedTasksSub = this.updatedTasks.subscribe(taskList => {
       this._tasksSubject.next(taskList);
       this.calculateItemsLeft(taskList);
@@ -92,7 +90,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
       });
       this._subscriptions.push(updateItemsSub);
     }
-    const itemsLeftObservableSub =  this._taskService.tasksLeft$.subscribe(resp => {
+    const itemsLeftObservableSub = this._taskService.tasksLeft$.subscribe(resp => {
       if (resp.length === 0) return;
       this._itemsLeft.next(resp);
     }, error => {

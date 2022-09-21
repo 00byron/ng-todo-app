@@ -11,7 +11,7 @@ import { ITask } from 'src/app/interfaces/task.interface';
 })
 export class TaskFormComponent implements OnInit, OnDestroy {
   @Output() updatedDataSet: EventEmitter<ITask[]> = new EventEmitter<ITask[]>();
-  @ViewChild('taskInputField', {static: true}) taskInputField: ElementRef;
+  @ViewChild('taskInputField', { static: true }) taskInputField: ElementRef;
   public task: string = '';
 
   // manage our data subscriptions to prevent memeroy leaks
